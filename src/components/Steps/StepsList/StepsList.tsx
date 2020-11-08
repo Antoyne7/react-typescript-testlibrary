@@ -4,14 +4,19 @@ import './StepsList.scss'
 import StepsContext from "../../../contexts/StepsContext";
 
 import StepsCard from "../StepsCard/StepsCard";
+import {Step} from "../../../pages/Steps/Steps";
 
-const StepsList = ({isAllowedToSeeStep}) => {
+type StepsListProps = Readonly<{
+  isAllowedToSeeStep: Function
+}>
 
-    const { steps } = useContext(StepsContext)
+const StepsList: React.FC<StepsListProps> = ({isAllowedToSeeStep}) => {
 
-    const renderSteps = () => {
+    const { steps }: {steps: Step[]} = useContext(StepsContext)
+
+    const renderSteps = (): JSX.Element[] => {
         const lastIndex = steps.length - 1
-        return steps.map((step, index) => {
+        return steps.map((step: Step, index: number) => {
             return (
                 <StepsCard
                     key={step.id}

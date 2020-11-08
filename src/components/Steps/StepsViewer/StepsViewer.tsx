@@ -3,7 +3,7 @@ import './StepsViewer.scss'
 
 import StepsContext from "../../../contexts/StepsContext";
 
-function StepsViewer() {
+const StepsViewer: React.FC = () => {
 
     const { activeStep, validateStep } = useContext(StepsContext)
 

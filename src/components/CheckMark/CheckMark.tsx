@@ -3,7 +3,12 @@ import './CheckMark.scss'
 
 import tick from '../../assets/tick.svg'
 
-function CheckMark({isChecked = false, isLastStep = false}) {
+type CheckMarkProps = Readonly<{
+    isChecked: boolean,
+    isLastStep: boolean
+}>
+
+const CheckMark: React.FC<CheckMarkProps> = ({isChecked = false, isLastStep = false}) => {
     return (
         <div className={"CheckMark"}>
             <div className={`check ${isChecked ? 'checked' : ''}`}>
@@ -11,7 +16,6 @@ function CheckMark({isChecked = false, isLastStep = false}) {
             </div>
             {!isLastStep && <div className={"check-line"}/>}
         </div>
-
     )
 }
 

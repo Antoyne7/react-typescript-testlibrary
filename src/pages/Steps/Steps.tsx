@@ -1,10 +1,22 @@
-import React, {useState} from 'react'
+import React, { useState } from 'react'
 
 import StepsList from "../../components/Steps/StepsList/StepsList";
 import StepsViewer from "../../components/Steps/StepsViewer/StepsViewer";
-import StepsContext from "../../contexts/StepsContext";
+import StepsContext, {StepContext} from "../../contexts/StepsContext";
 
-const stepsList = [
+export type Step = Readonly<{
+    id: number,
+    name: string,
+    duration: number,
+    validated: boolean
+}>
+
+type StepState = Readonly<{
+    steps: Step[],
+    activeStep: Step
+}>
+
+const stepsList: Step[] = [
     {
         id: 1,
         name: 'Constitution du dossier',
@@ -31,52 +43,58 @@ const stepsList = [
     }
 ]
 
-const Steps = () => {
+const Steps: React.FC = () => {
 
-    const [stepsState, updateStepsState] = useState({
+    const [stepsState, updateStepsState]: [StepState, Function] = useState({
         steps: stepsList,
         activeStep: stepsList[0]
     })
 
-    const validateStep = (id) => {
-        updateStepsState(prevState => {
-            const newState = {...prevState}
-            const index = newState.steps.findIndex(step => step.id === id)
-            newState.steps[index].validated = true
-            return newState
+    const validateStep = (id: number): void => {
+        updateStepsState((prevState: StepState) => {
+            const updatedSteps = prevState.steps.map((step: Step) => {
+                if (step.id === id) {
+                    return {
+                        ...step,
+                        validated: true
+                    }
+                }
+                return step
+            })
+            return { ...prevState, steps: updatedSteps }
         })
+        if (stepsState.activeStep.id === id) {
+            onChange(id)
+        }
     }
 
-    const onChange = (id) => {
+    const onChange = (id: number): void => {
         if (isAllowedToSeeStep(id)) {
-            updateStepsState(prevState => {
-                const newState = {...prevState}
-                const index = newState.steps.findIndex(step => step.id === id)
-                newState.activeStep = newState.steps[index]
-                return newState
+            updateStepsState((prevState: StepState) => {
+                const index = prevState.steps.findIndex(step => step.id === id)
+                const activeStep = prevState.steps[index]
+                return { ...prevState, activeStep }
             })
         }
     }
 
-    const stepsContext = {
+    const stepsContext: StepContext = {
         steps: stepsState.steps,
         activeStep: stepsState.activeStep,
         validateStep,
         onChange
     }
 
-    const isAllowedToSeeStep = (id) => {
+    const isAllowedToSeeStep = (id: number): boolean => {
         const steps = stepsState.steps
         const index = steps.findIndex(step => step.id === id)
 
-        if (typeof index !== "number" ||
-            index < 0 ||
-            index > steps.length - 1) {
+        if (index < 0 || index > steps.length - 1) {
             return false
         }
 
         // If the step is already validated
-        if (steps[index].validated === true) {
+        if (steps[index].validated) {
             return true
         }
 
@@ -86,13 +104,12 @@ const Steps = () => {
         }
 
         // If step before is validated
-        if (index >= 1 && steps[index - 1].validated === true) {
+        if (index >= 1 && steps[index - 1].validated) {
             return true
         }
 
         return false
     }
-
 
     return (
         <StepsContext.Provider value={stepsContext}>
