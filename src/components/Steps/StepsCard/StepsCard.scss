@@ -1,0 +1,41 @@
+
+
+.StepsCard {
+  $titleColor: #1e2142;
+  $textColor: #a8afca;
+
+  display: flex;
+  margin-bottom: 16px;
+  padding: 8px 8px 8px 0;
+  border-radius: 6px;
+  cursor: pointer;
+
+  .check-container {
+    min-width: 40px;
+    max-width: 40px;
+    display: flex;
+    justify-content: center;
+  }
+
+  h3 {
+    margin: 0 0 6px;
+    color: $titleColor;
+  }
+
+  p {
+    margin: 0;
+    color: $textColor;
+    font-weight: 500;
+  }
+
+  &:hover:not(.disabled), &.active-step {
+    background-color: rgba(200, 200, 200, 0.15);
+  }
+
+  &.disabled {
+    cursor: default;
+    .card-info {
+      opacity: 0.4;
+    }
+  }
+}

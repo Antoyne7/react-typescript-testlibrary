@@ -1,3 +1,7 @@
+:root {
+  --background: #f5f7fb;
+}
+
 .training-title {
     font-size: 4rem;
     width: fit-content;
@@ -6,7 +10,7 @@
 
 .App {
     font-family: Raleway, serif;
-    background-color: #f5f7fb;
+    background-color: var(--background);
 }
 
 .container {
@@ -15,12 +19,16 @@
     margin: 0 auto;
     padding: 0 8px;
     @media (min-width: 1081px) {
-      max-width: 1180px;
+      max-width: 1300px;
     }
     @media (max-width: 1080px) {
-      max-width: 768px;
+      max-width: 910px;
     }
     @media (max-width: 768px) {
       max-width: 512px;
     }
+}
+
+* {
+  box-sizing: border-box;
 }

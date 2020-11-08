@@ -1,21 +1,40 @@
 $size: 18px;
+$blue: #6365ff;
+$lightBorder: #e4e8f1;
 
 .CheckMark {
-  width: $size;
-  height: $size;
-  border-radius: 30px;
-  border: 3px solid #e4e8f1;
+  position: relative;
   display: flex;
   justify-content: center;
-  align-items: center;
 
-  &.checked {
-    border: 3px solid #6365ff;
-    background-color: #6365ff;
+  .check {
+    z-index: 2;
+    width: $size;
+    height: $size;
+    margin-top: 2px;
+    border-radius: 30px;
+    border: 2px solid $lightBorder;
+    background-color: var(--background);
+    display: flex;
+    justify-content: center;
+    //align-items: center;
 
+    &.checked {
+      border: 2px solid $blue;
+      background-color: $blue;
+    }
+    img {
+      width: 80%;
+    }
   }
-  img {
-    width: 80%;
-  }
 
+  .check-line {
+    position: absolute;
+    background-color: $lightBorder;
+    height: 150%;
+    width: calc(#{$size} / 4);
+    top: calc(#{$size} - 3px);
+    z-index: 1;
+  }
 }
+

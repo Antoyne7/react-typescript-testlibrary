@@ -3,11 +3,15 @@ import './CheckMark.scss'
 
 import tick from '../../assets/tick.svg'
 
-function CheckMark({checked = false}) {
+function CheckMark({isChecked = false, isLastStep = false}) {
     return (
-        <div className={`CheckMark ${checked ? 'checked' : ''}`}>
-            {checked ? <img src={tick} alt={tick}/> : ''}
+        <div className={"CheckMark"}>
+            <div className={`check ${isChecked ? 'checked' : ''}`}>
+                {isChecked ? <img src={tick} alt={tick}/> : ''}
+            </div>
+            {!isLastStep && <div className={"check-line"}/>}
         </div>
+
     )
 }
 
