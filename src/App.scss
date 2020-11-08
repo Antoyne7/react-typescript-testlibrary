@@ -2,31 +2,43 @@
   --background: #f5f7fb;
 }
 
+html {
+  background-color: var(--background);
+}
+
 .training-title {
-    font-size: 4rem;
-    width: fit-content;
-    margin: 30px auto 20px;
+  font-size: 4rem;
+  width: fit-content;
+  margin: 30px auto 20px;
 }
 
 .App {
-    font-family: Raleway, serif;
-    background-color: var(--background);
+  font-family: Raleway, serif;
 }
 
 .container {
-    display: flex;
-    max-width: 100vw;
-    margin: 0 auto;
-    padding: 0 8px;
-    @media (min-width: 1081px) {
-      max-width: 1300px;
-    }
-    @media (max-width: 1080px) {
-      max-width: 910px;
-    }
-    @media (max-width: 768px) {
-      max-width: 512px;
-    }
+  display: flex;
+  max-width: 100vw;
+  margin: 0 auto;
+  padding: 0 8px;
+  flex-wrap: wrap;
+  @media (min-width: 1081px) {
+    max-width: 1300px;
+  }
+  @media (max-width: 1080px) {
+    max-width: 910px;
+  }
+  @media (max-width: 910px) {
+    flex-direction: column;
+    max-width: 512px;
+  }
+}
+
+.steps-container {
+  width: 35%;
+  @media (max-width: 910px) {
+    width: 100%;
+  }
 }
 
 * {

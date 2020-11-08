@@ -116,7 +116,7 @@ const Steps: React.FC = () => {
             <div className="App">
                 <h2 className="training-title">Training</h2>
                 <div className={"container"}>
-                    <div style={{width: '35%'}}>
+                    <div className={"steps-container"}>
                         <StepsList isAllowedToSeeStep={isAllowedToSeeStep}/>
                     </div>
                     <StepsViewer/>

@@ -6,4 +6,8 @@
   align-items: center;
   flex-direction: column;
   background-color: lightgray;
+
+  @media (max-width: 910px) {
+    width: 100%;
+  }
 }
